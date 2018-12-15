@@ -1,6 +1,7 @@
 package com.derevets.artem.config.OAuthConfig;
 
 
+import com.derevets.artem.config.WebSecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -28,7 +29,6 @@ import javax.sql.DataSource;
 @EnableAuthorizationServer
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @Import(WebSecurityConfig.class)
-@PropertySource({"classpath:persistence.properties"})
 public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
     @Autowired

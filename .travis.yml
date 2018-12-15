@@ -1,0 +1,10 @@
+language: java
+jdk: oraclejdk8
+deploy:
+  project: heroku
+  api_key:
+    secure: $HEROKU_API_KEY
+
+script:
+  mvn spring-boot:run -Dspring-boot.run.profiles=release
+
