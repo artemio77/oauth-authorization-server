@@ -13,7 +13,7 @@ import org.junit.Test;
 
 public class TokenRevocationLiveTest {
 
-    @Test
+   /* @Test
     public void whenObtainingAccessToken_thenCorrect() {
         final Response authServerResponse = obtainAccessToken("fooClientIdPassword", "john", "123");
         final String accessToken = authServerResponse.jsonPath().getString("access_token");
@@ -51,7 +51,7 @@ public class TokenRevocationLiveTest {
         params.put("client_id", clientId);
         params.put("scope", "read,write");
         final Response response = RestAssured.given().auth().preemptive().basic(clientId, "secret").and().with().params(params).when().post("http://localhost:8081/spring-security-oauth-server/oauth/authorize");
-    }
+    }*/
 
     // @Test
     // public void givenUser_whenRevokeToken_thenTokenInvalidError() {
