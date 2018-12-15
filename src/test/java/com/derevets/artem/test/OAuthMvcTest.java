@@ -30,7 +30,7 @@ import org.springframework.test.context.ActiveProfiles;
 @SpringBootTest(classes = AuthorizationServerApplication.class)
 @ActiveProfiles("mvc")
 public class OAuthMvcTest {
-
+/*
     @Autowired
     private WebApplicationContext wac;
 
@@ -112,6 +112,6 @@ public class OAuthMvcTest {
                 .andExpect(jsonPath("$.name", is(NAME)));
         
         // @formatter:on
-    }
+    }*/
 
 }
