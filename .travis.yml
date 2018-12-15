@@ -1,10 +1,8 @@
 language: java
-jdk: oraclejdk8
+jdk:
+  - oraclejdk8
 deploy:
-  project: heroku
-  api_key:
+  provider: heroku
+  api-key:
     secure: $HEROKU_API_KEY
-
-script:
-  mvn spring-boot:run -Dspring-boot.run.profiles=release
-
+  app: oauth-my-autorization-server
