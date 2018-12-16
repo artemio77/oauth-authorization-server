@@ -14,13 +14,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@PropertySource("classpath:application.properties")
+@Profile("release")
+@PropertySource("classpath:application-release.properties")
 @Component
 @Transactional
-public class EmailConstructor {
+public class EmailConstructor extends MailConfig{
 
-    @Autowired
-    private Environment env;
 
     @Autowired
     private JavaMailSender javaMailSender;
@@ -33,7 +32,7 @@ public class EmailConstructor {
         email.setTo(recipientAddress);
         email.setSubject(subject);
         email.setText( message + user.getEmail() + " Verification Code - " + user.getVerificationCode());
-        email.setFrom(env.getProperty("email.server"));
+        email.setFrom(from);
         return email;
     }
 

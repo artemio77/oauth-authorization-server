@@ -1,6 +1,5 @@
-package com.derevets.artem.config;
+package com.derevets.artem.email;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -11,33 +10,10 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import java.util.Properties;
 
 @Configuration
-@PropertySource("classpath:application.properties")
-public class MailConfig {
+@Profile("release")
+@PropertySource("classpath:application-release.properties")
+public class MailProdConfig extends MailConfig {
 
-    @Value("${mail.protocol}")
-    private String protocol;
-    @Value("${mail.host}")
-    private String host;
-    @Value("${mail.port}")
-    private Integer port;
-    @Value("${mail.smtp.socketFactory.port}")
-    private Integer socketPort;
-    @Value("${mail.smtp.auth}")
-    private Boolean auth;
-    @Value("${mail.smtp.starttls.enable}")
-    private Boolean starttls;
-    @Value("${mail.smtp.starttls.required}")
-    private Boolean startlls_required;
-    @Value("${mail.smtp.debug}")
-    private Boolean debug;
-    @Value("${mail.smtp.socketFactory.fallback}")
-    private Boolean fallback;
-    @Value("${mail.from}")
-    private String from;
-    @Value("${mail.username}")
-    private String username;
-    @Value("${mail.password}")
-    private String password;
 
     @Bean
     public JavaMailSender javaMailSender() {
