@@ -3,6 +3,7 @@ package com.derevets.artem.email;
 import com.derevets.artem.model.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -18,8 +19,11 @@ import org.springframework.transaction.annotation.Transactional;
 @PropertySource("classpath:application-release.properties")
 @Component
 @Transactional
-public class EmailConstructor extends MailConfig{
+public class EmailConstructor {
 
+
+    @Value("${mail.from}")
+    private String from;
 
     @Autowired
     private JavaMailSender javaMailSender;
