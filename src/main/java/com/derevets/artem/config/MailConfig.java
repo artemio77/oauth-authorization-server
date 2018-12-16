@@ -11,8 +11,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import java.util.Properties;
 
 @Configuration
-@Profile("release")
-@PropertySource("classpath:application-release.properties")
+@PropertySource("classpath:application.properties")
 public class MailConfig {
 
     @Value("${mail.protocol}")
