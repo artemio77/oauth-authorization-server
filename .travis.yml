@@ -5,8 +5,6 @@ jdk:
 before_script:
   - mvn clean
   - mvn package
-  - mvn deploy
-
 deploy:
   provider: heroku
   api_key:
