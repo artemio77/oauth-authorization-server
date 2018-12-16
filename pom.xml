@@ -207,8 +207,19 @@
                     <target>8</target>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
+    <distributionManagement>
+        <repository>
+            <id>releases</id>
+            <url>https://oauth-my-autorization-server.herokuapp.com/</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <url>https://oauth-my-autorization-server.herokuapp.com/</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <!-- <profiles> <profile> <id>dev</id> <build> <resources> <resource> <directory>src/main/resources</directory>
         <filtering>true</filtering> <excludes> <exclude>*.jks</exclude> </excludes>
