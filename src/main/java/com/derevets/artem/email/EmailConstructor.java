@@ -3,6 +3,7 @@ package com.derevets.artem.email;
 import com.derevets.artem.model.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
@@ -13,7 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@PropertySource("classpath:application.properties")
+@Profile("release")
+@PropertySource("classpath:application-release.properties")
 @Component
 @Transactional
 public class EmailConstructor {
