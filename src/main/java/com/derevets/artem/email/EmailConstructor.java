@@ -17,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Profile("release")
 @PropertySource("classpath:application-release.properties")
-@Transactional
 public class EmailConstructor {
 
 
