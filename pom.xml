@@ -213,15 +213,12 @@
     <distributionManagement>
         <repository>
             <id>releases</id>
-            <url>https://oauth-my-autorization-server.herokuapp.com/</url>
+            <url>https://oauth-autorization-server.herokuapp.com/</url>
         </repository>
         <snapshotRepository>
             <id>snapshots</id>
-            <url>https://oauth-my-autorization-server.herokuapp.com/</url>
+            <url>https://oauth-autorization-server.herokuapp.com/</url>
         </snapshotRepository>
     </distributionManagement>
 
-    <!-- <profiles> <profile> <id>dev</id> <build> <resources> <resource> <directory>src/main/resources</directory>
-        <filtering>true</filtering> <excludes> <exclude>*.jks</exclude> </excludes>
-        </resource> </resources> </build> </profile> </profiles> -->
 </project>

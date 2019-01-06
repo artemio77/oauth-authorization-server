@@ -11,4 +11,4 @@ deploy:
     {
       secure: $HEROKU_API_KEY
     }
-  app: oauth-my-autorization-server
+  app: oauth-autorization-server
