@@ -3,6 +3,7 @@ jdk:
   - oraclejdk8
 script:
   - mvn clean
+  - mvn package
 deploy:
   provider: heroku
   api-key:
