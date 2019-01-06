@@ -20,9 +20,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
         "com.derevets.artem"
 })
 @EnableTransactionManagement
-@PropertySource("classpath:clients.properties")
 @Slf4j
-public class PersistenceConfig extends WebMvcConfigurerAdapter {
+public class PersistenceConfig {
 
 }
 
