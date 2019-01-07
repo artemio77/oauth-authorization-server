@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @ComponentScan("com.derevets.artem")
 @EnableJpaRepositories(basePackages = {
-        "com.derevets.artem"
+        "com.derevets.artem.repository"
 })
 @EnableTransactionManagement
 public class AuthorizationServerApplication {
