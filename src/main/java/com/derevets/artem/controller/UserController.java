@@ -37,18 +37,12 @@ public class UserController {
 
     private final PasswordEncoder passwordEncoder;
 
-    private final UserDetailsService userDetailsService;
-
-    private final AuthenticationManager authenticationManager;
-
     private final TokenStore tokenStore;
 
     @Autowired
-    public UserController(UserService userService, PasswordEncoder passwordEncoder, UserDetailsService userDetailsService, AuthenticationManager authenticationManager, TokenStore tokenStore) {
+    public UserController(UserService userService, PasswordEncoder passwordEncoder,  TokenStore tokenStore) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
-        this.userDetailsService = userDetailsService;
-        this.authenticationManager = authenticationManager;
         this.tokenStore = tokenStore;
     }
 
