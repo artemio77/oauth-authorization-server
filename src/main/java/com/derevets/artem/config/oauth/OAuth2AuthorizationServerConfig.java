@@ -1,7 +1,6 @@
-package com.derevets.artem.config.OAuthConfig;
+package com.derevets.artem.config.oauth;
 
 
-import com.derevets.artem.config.WebSecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 

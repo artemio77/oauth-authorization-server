@@ -1,4 +1,4 @@
-package com.derevets.artem.config;
+package com.derevets.artem.config.oauth;
 
 import com.derevets.artem.service.RepositoryUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;

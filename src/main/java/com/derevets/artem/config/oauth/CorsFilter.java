@@ -1,4 +1,4 @@
-package com.derevets.artem.config;
+package com.derevets.artem.config.oauth;
 
 import java.io.IOException;
 
