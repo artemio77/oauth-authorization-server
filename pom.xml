@@ -185,7 +185,7 @@
                 <filtering>true</filtering>
             </resource>
         </resources>
-        <finalName>oauth-authorization-server</finalName>
+        <finalName>oauth-resource-server-1</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -194,7 +194,6 @@
                     <addResources>true</addResources>
                 </configuration>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
@@ -212,7 +211,6 @@
                     <target>8</target>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
     <distributionManagement>
