@@ -1,6 +1,7 @@
 package com.derevets.artem.config.rabbit;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.amqp.core.AmqpAdmin;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -26,7 +27,12 @@ public class RabbitMqConfig {
     @Bean
     public ConnectionFactory connectionFactory() throws URISyntaxException {
         URI uri = new URI(rabbitMqUrl);
-        return new CachingConnectionFactory(uri);
+        CachingConnectionFactory connectionFactory = new CachingConnectionFactory(uri);
+        if (StringUtils.isNotBlank(uri.getPath()))
+            connectionFactory.setVirtualHost(uri.getPath().replace("/", ""));
+        connectionFactory.setConnectionTimeout(3000);
+        connectionFactory.setRequestedHeartBeat(30);
+        return connectionFactory;
     }
 
     @Bean
