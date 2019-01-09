@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.PropertySource;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -19,6 +20,8 @@ import java.net.URISyntaxException;
 
 @Slf4j
 @Configuration
+@PropertySource(value = {"classpath:application-dev.properties",
+        "classpath:application-release.properties"})
 public class RabbitMqConfig {
 
     @Value("${rabbitmq.url}")
