@@ -41,10 +41,8 @@ public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigur
     @Autowired
     private UserDetailsService userDetailsService;
 
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Bean
     public OAuth2AccessDeniedHandler oauthAccessDeniedHandler() {
@@ -64,7 +62,7 @@ public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigur
 
     @Override
     public void configure(final AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
-        oauthServer.tokenKeyAccess("permitAll()").checkTokenAccess("permitAll()").passwordEncoder(passwordEncoder());
+        oauthServer.tokenKeyAccess("permitAll()").checkTokenAccess("permitAll()").passwordEncoder(passwordEncoder);
 
     }
 
@@ -89,7 +87,6 @@ public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigur
         defaultTokenServices.setSupportRefreshToken(true);
         return defaultTokenServices;
     }
-
 
 
     @Bean
