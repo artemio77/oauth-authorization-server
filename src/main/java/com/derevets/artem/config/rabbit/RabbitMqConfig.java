@@ -1,7 +1,7 @@
 package com.derevets.artem.config.rabbit;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.core.AmqpAdmin;
+import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -18,7 +18,7 @@ public class RabbitMqConfig {
     private ConnectionFactory connectionFactory;
 
     @Bean
-    public AmqpAdmin amqpAdmin() {
+    public RabbitAdmin amqpAdmin() {
         return new RabbitAdmin(connectionFactory);
     }
 
@@ -26,4 +26,5 @@ public class RabbitMqConfig {
     public RabbitTemplate rabbitTemplate() {
         return new RabbitTemplate(connectionFactory);
     }
+
 }

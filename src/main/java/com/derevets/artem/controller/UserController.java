@@ -26,8 +26,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 
-
-
 @RequestMapping({"/auth"})
 @Slf4j
 @RestController
@@ -40,15 +38,15 @@ public class UserController {
     private final TokenStore tokenStore;
 
     @Autowired
-    public UserController(UserService userService, PasswordEncoder passwordEncoder,  TokenStore tokenStore) {
+    public UserController(UserService userService, PasswordEncoder passwordEncoder, TokenStore tokenStore) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
         this.tokenStore = tokenStore;
     }
 
-    @PutMapping("/register")
     @Transactional
-    public ResponseEntity<User> create(@RequestBody User user) {
+    @PutMapping("/register")
+    public ResponseEntity<User> registerUser(@RequestBody User user) {
         log.info(user.toString());
         User newUser = User.getBuilder()
                 .email(user.getEmail())
@@ -97,14 +95,14 @@ public class UserController {
         return false;
     }
 
-    @RequestMapping(value = "/user/{email:.+}", method = RequestMethod.GET)
+    @GetMapping(value = "/user/{email:.+}")
     public ResponseEntity<User> user(@PathVariable("email") String email) {
         User user = userService.findUserByEmail(email);
         log.info("User,{}", user.toString());
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/getToken/{email:.+}", method = RequestMethod.GET)
+    @GetMapping(value = "/getToken/{email:.+}")
     public ResponseEntity<String> getUserToken(@PathVariable("email") String email) {
         Map<String, String> userTokenStore = new HashMap<>();
         String token = tokenStore.findTokensByClientIdAndUserName("fooClientIdPassword", email)
