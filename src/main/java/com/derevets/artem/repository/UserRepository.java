@@ -8,16 +8,19 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, UUID> {
 
-    void deleteById(User user);
+    void delete(User user);
+
+    void deleteById(UUID id);
 
     List<User> findAll();
 
 
-    Optional<User> findById(Long id);
+    Optional<User> findById(UUID id);
 
     User save(User user);
 

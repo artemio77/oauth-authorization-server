@@ -1,40 +1,34 @@
 package com.derevets.artem.model;
 
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import lombok.Data;
 import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
  * @author Artem Derevets
  */
+@Data
 @MappedSuperclass
 public abstract class BaseEntity<ID> {
 
-    @Column(name = "creation_time", nullable = false)
-    @Type(type = "org.hibernate.type.LocalDateTimeType")
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime creationTime;
 
-    @Column(name = "modification_time", nullable = false)
-    @Type(type = "org.hibernate.type.LocalDateTimeType")
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime modificationTime;
 
     @Version
     private long version;
 
-    public abstract ID getId();
-
-    public LocalDateTime getCreationTime() {
-        return creationTime;
-    }
-
-    public LocalDateTime getModificationTime() {
-        return modificationTime;
-    }
-
-    public long getVersion() {
-        return version;
-    }
 
     @PrePersist
     public void prePersist() {

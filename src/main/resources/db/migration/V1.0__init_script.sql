@@ -1,6 +1,6 @@
 CREATE TABLE public.user_accounts
 (
-  id                         bigserial PRIMARY KEY         NOT NULL,
+  id                         uuid PRIMARY KEY         NOT NULL,
   creation_time              timestamp without time zone   NOT NULL,
   email                      character varying(100) UNIQUE NOT NULL,
   first_name                 character varying(100)        NOT NULL,
@@ -94,15 +94,6 @@ CREATE UNIQUE INDEX user_accounts_verification_code_uindex
 
 
 
-INSERT INTO public.user_accounts (id, creation_time, email, first_name, last_name, modification_time, password, role, sign_in_provider, version, is_account_non_locked, is_account_non_expired, is_credentials_non_expired, is_enabled, verification_code)
-VALUES
-  (21, '2018-09-26 23:40:26.502000', 'derevets.artem@hotmail.com', 'Artem', 'Derevets', '2018-09-26 23:40:43.817000',
-       '$2a$10$Di.wn9XO3UJ6XIQn6D/R.ep0f8UXuZOM6fI6uvMgRsR2GrmBFDXaq', 'ROLE_USER', null, 1, true, true, true, true,
-   null);
-INSERT INTO public.user_accounts (id, creation_time, email, first_name, last_name, modification_time, password, role, sign_in_provider, version, is_account_non_locked, is_account_non_expired, is_credentials_non_expired, is_enabled, verification_code)
-VALUES (79, '2018-10-15 03:06:40.286000', 'derevets.artem@gmail.com', 'artem', 'derevets', '2018-10-15 03:06:56.643000',
-            '$2a$10$57ilfsdEiVrSE25BqMqeye2mEH5v8NGRZq/QJaW4nFJFtYQkDQX.m', 'ROLE_USER', null, 1, true, true, true,
-        true, null);
 
 INSERT INTO public.oauth_client_details (client_id, resource_ids, client_secret, scope, authorized_grant_types, web_server_redirect_uri, authorities, access_token_validity, refresh_token_validity, additional_information, autoapprove)
 VALUES ('spring-security-oauth2-read-write-client', 'resource-server-rest-api',

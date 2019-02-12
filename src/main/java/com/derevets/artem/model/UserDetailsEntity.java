@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * @author Artem Derevets
@@ -18,7 +19,7 @@ import java.util.Set;
 @Builder
 public class UserDetailsEntity implements UserDetails {
 
-    private Long id;
+    private UUID id;
 
     private String email;
 

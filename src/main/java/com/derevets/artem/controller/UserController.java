@@ -3,25 +3,21 @@ package com.derevets.artem.controller;
 
 import com.derevets.artem.model.User;
 import com.derevets.artem.service.UserService;
-import com.google.common.io.BaseEncoding;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -37,16 +33,18 @@ public class UserController {
 
     private final TokenStore tokenStore;
 
+    private final RabbitTemplate rabbitTemplate;
+
     @Autowired
-    public UserController(UserService userService, PasswordEncoder passwordEncoder, TokenStore tokenStore) {
+    public UserController(UserService userService, PasswordEncoder passwordEncoder, TokenStore tokenStore, RabbitTemplate rabbitTemplate) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
         this.tokenStore = tokenStore;
+        this.rabbitTemplate = rabbitTemplate;
     }
 
-    @Transactional
     @PutMapping("/register")
-    public ResponseEntity<User> registerUser(@RequestBody User user) {
+    public ResponseEntity<User> registerUser(@RequestBody User user) throws IOException, JSONException {
         log.info(user.toString());
         User newUser = User.getBuilder()
                 .email(user.getEmail())
@@ -59,19 +57,15 @@ public class UserController {
                 .isEnabled(false)
                 .build();
         userService.registerNewAccount(newUser);
+        log.info("user {}", newUser);
         return new ResponseEntity<>(newUser, HttpStatus.OK);
     }
 
     @GetMapping(path = "/{code}")
     public ResponseEntity<Long> checkCodeByEmail(@PathVariable("code") Long code) {
         log.info(code.toString());
-        User user = userService.findUserByEmail(userService.checkUserVerificationCode(code));
-        if (!user.getIsEnabled()) {
-            user.setIsEnabled(true);
-            user.setVerificationCode(null);
-            userService.updateUser(user);
-        }
-        return new ResponseEntity<Long>(user.getVerificationCode(), HttpStatus.OK);
+        User user = userService.activateUser(code);
+        return new ResponseEntity<>(user.getVerificationCode(), HttpStatus.OK);
     }
 
     @GetMapping("/exist/{email:.+}")

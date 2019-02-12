@@ -9,6 +9,8 @@ import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.UUID;
 
 /**
  * @author Artem Derevets
@@ -19,13 +21,14 @@ import javax.persistence.*;
 @JsonPropertyOrder({
         "id", "email", "firstName", "lastName", "password"
 })
-public class User extends BaseEntity<Long> {
+public class User extends BaseEntity<UUID> implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", unique = true)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonProperty("id")
     @JsonView(UserView.ShortView.class)
-    private Long id;
+    private UUID id;
 
     @JsonProperty("email")
     @Column(name = "email", length = 100, nullable = false, unique = true)
@@ -71,6 +74,10 @@ public class User extends BaseEntity<Long> {
     public User() {
     }
 
+    public UUID getId() {
+        return id;
+    }
+
     public static Builder getBuilder() {
         return new Builder();
     }
@@ -86,7 +93,7 @@ public class User extends BaseEntity<Long> {
                 .append("lastName", lastName)
                 .append("modificationTime", this.getModificationTime())
                 .append("version", this.getVersion())
-                .append("role"+ this.getRole())
+                .append("role" + this.getRole())
                 .toString();
     }
 
@@ -99,7 +106,7 @@ public class User extends BaseEntity<Long> {
             user.role = Role.ROLE_USER;
         }
 
-        public Builder id(Long id) {
+        public Builder id(UUID id) {
             user.id = id;
             return this;
         }
