@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -22,13 +23,6 @@ import java.util.UUID;
         "id", "email", "firstName", "lastName", "password"
 })
 public class User extends BaseEntity<UUID> implements Serializable {
-
-    @Id
-    @Column(name = "id", unique = true)
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @JsonProperty("id")
-    @JsonView(UserView.ShortView.class)
-    private UUID id;
 
     @JsonProperty("email")
     @Column(name = "email", length = 100, nullable = false, unique = true)
@@ -74,9 +68,6 @@ public class User extends BaseEntity<UUID> implements Serializable {
     public User() {
     }
 
-    public UUID getId() {
-        return id;
-    }
 
     public static Builder getBuilder() {
         return new Builder();
@@ -86,7 +77,7 @@ public class User extends BaseEntity<UUID> implements Serializable {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .append("id", id)
+                .append("id", super.getId())
                 .append("creationTime", this.getCreationTime())
                 .append("email", email)
                 .append("firstName", firstName)
@@ -104,11 +95,6 @@ public class User extends BaseEntity<UUID> implements Serializable {
         public Builder() {
             user = new User();
             user.role = Role.ROLE_USER;
-        }
-
-        public Builder id(UUID id) {
-            user.id = id;
-            return this;
         }
 
         public Builder email(String email) {
